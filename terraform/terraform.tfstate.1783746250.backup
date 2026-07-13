@@ -1,0 +1,2179 @@
+{
+  "version": 4,
+  "terraform_version": "1.13.4",
+  "serial": 46,
+  "lineage": "891f197c-099a-0350-8229-cee15ff115b0",
+  "outputs": {
+    "api_gateway_url": {
+      "value": "https://8mve2ats01.execute-api.us-east-1.amazonaws.com/dev/chat",
+      "type": "string"
+    },
+    "data_source_id": {
+      "value": "0NH2J2T3TC",
+      "type": "string"
+    },
+    "ecr_repository_url": {
+      "value": "541614061098.dkr.ecr.us-east-1.amazonaws.com/devops-chatbot-streamlit",
+      "type": "string"
+    },
+    "knowledge_base_id": {
+      "value": "2EKLTQXAXF",
+      "type": "string"
+    },
+    "s3_bucket_name": {
+      "value": "devops-chatbot-docs-541614061098",
+      "type": "string"
+    },
+    "streamlit_url": {
+      "value": "http://devops-chatbot-alb-1583798999.us-east-1.elb.amazonaws.com",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "data",
+      "type": "archive_file",
+      "name": "lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/archive\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "exclude_symlink_directories": null,
+            "excludes": [
+              "__pycache__",
+              "lambda.zip"
+            ],
+            "id": "a4a41629c9c0abaa94fea903b05bf13b27833c10",
+            "output_base64sha256": "xUvFG+8ulCxdQFWLu0/fmwZnvIbz0UUnsZzV1IbAYeo=",
+            "output_base64sha512": "JjNicHDFsDdDiNB6zcHkrvaau4KZaAZwkp0L4ZQIwSGfQiLjQmv5RqZOhHXoeXQae196E1tIFeHaXXQsYZ8qQQ==",
+            "output_file_mode": null,
+            "output_md5": "43ee0ec09628a1f2a58889fd98241823",
+            "output_path": "./.build/lambda.zip",
+            "output_sha": "a4a41629c9c0abaa94fea903b05bf13b27833c10",
+            "output_sha256": "c54bc51bef2e942c5d40558bbb4fdf9b0667bc86f3d14527b19cd5d486c061ea",
+            "output_sha512": "2633627070c5b0374388d07acdc1e4aef69abb8299680670929d0be19408c1219f4222e3426bf946a64e8475e879741a7b5f7a135b4815e1da5d742c619f2a41",
+            "output_size": 1918,
+            "source": [],
+            "source_content": null,
+            "source_content_filename": null,
+            "source_dir": "./../lambda",
+            "source_file": null,
+            "type": "zip"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_caller_identity",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_id": "541614061098",
+            "arn": "arn:aws:iam::541614061098:user/mlops",
+            "id": "541614061098",
+            "user_id": "AIDAX4GVWWYVH7SQDRS2B"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_region",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": "US East (N. Virginia)",
+            "endpoint": "ec2.us-east-1.amazonaws.com",
+            "id": "us-east-1",
+            "name": "us-east-1"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_subnets",
+      "name": "default",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "filter": [
+              {
+                "name": "default-for-az",
+                "values": [
+                  "true"
+                ]
+              },
+              {
+                "name": "vpc-id",
+                "values": [
+                  "vpc-0a2065519f9bb9bb3"
+                ]
+              }
+            ],
+            "id": "us-east-1",
+            "ids": [
+              "subnet-0a6239d27aa57fcee",
+              "subnet-00d610bd10d597945",
+              "subnet-0b67892cfbdc178ac",
+              "subnet-01b946a17f119bbed",
+              "subnet-001a1903271b0ff29",
+              "subnet-03279076b93a5a9c6"
+            ],
+            "tags": null,
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_vpc",
+      "name": "default",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:541614061098:vpc/vpc-0a2065519f9bb9bb3",
+            "cidr_block": "172.31.0.0/16",
+            "cidr_block_associations": [
+              {
+                "association_id": "vpc-cidr-assoc-0bba83e0b31b306a6",
+                "cidr_block": "172.31.0.0/16",
+                "state": "associated"
+              }
+            ],
+            "default": true,
+            "dhcp_options_id": "dopt-0c79346544c98c4ad",
+            "enable_dns_hostnames": true,
+            "enable_dns_support": true,
+            "enable_network_address_usage_metrics": false,
+            "filter": null,
+            "id": "vpc-0a2065519f9bb9bb3",
+            "instance_tenancy": "default",
+            "ipv6_association_id": "",
+            "ipv6_cidr_block": "",
+            "main_route_table_id": "rtb-0e1a46cf0c28a867e",
+            "owner_id": "541614061098",
+            "state": null,
+            "tags": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_deployment",
+      "name": "chat",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "canary_settings": [],
+            "created_date": "2026-07-11T04:48:25Z",
+            "description": "",
+            "execution_arn": "arn:aws:execute-api:us-east-1:541614061098:8mve2ats01/",
+            "id": "k7rcoy",
+            "invoke_url": "https://8mve2ats01.execute-api.us-east-1.amazonaws.com/",
+            "rest_api_id": "8mve2ats01",
+            "stage_description": null,
+            "stage_name": null,
+            "triggers": {
+              "redeployment": "d350a1b37fc835c7bbb90f35e90419fca63787d0"
+            },
+            "variables": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_integration.lambda",
+            "aws_api_gateway_integration.options",
+            "aws_api_gateway_integration_response.options",
+            "aws_api_gateway_method.options",
+            "aws_api_gateway_method.post",
+            "aws_api_gateway_method_response.options_200",
+            "aws_api_gateway_resource.chat",
+            "aws_api_gateway_rest_api.chat",
+            "aws_bedrockagent_knowledge_base.devops",
+            "aws_iam_role.bedrock_kb",
+            "aws_iam_role.lambda",
+            "aws_lambda_function.chat",
+            "aws_opensearchserverless_access_policy.data",
+            "aws_opensearchserverless_collection.vector",
+            "aws_opensearchserverless_security_policy.encryption",
+            "aws_opensearchserverless_security_policy.network",
+            "data.archive_file.lambda",
+            "data.aws_caller_identity.current",
+            "opensearch_index.bedrock",
+            "time_sleep.wait_for_collection"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_integration",
+      "name": "lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "cache_key_parameters": [],
+            "cache_namespace": "91p1s1",
+            "connection_id": "",
+            "connection_type": "INTERNET",
+            "content_handling": "",
+            "credentials": "",
+            "http_method": "POST",
+            "id": "agi-8mve2ats01-91p1s1-POST",
+            "integration_http_method": "POST",
+            "passthrough_behavior": "WHEN_NO_MATCH",
+            "request_parameters": {},
+            "request_templates": {},
+            "resource_id": "91p1s1",
+            "rest_api_id": "8mve2ats01",
+            "timeout_milliseconds": 29000,
+            "tls_config": [],
+            "type": "AWS_PROXY",
+            "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:541614061098:function:devops-chatbot-chat/invocations"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_method.post",
+            "aws_api_gateway_resource.chat",
+            "aws_api_gateway_rest_api.chat",
+            "aws_bedrockagent_knowledge_base.devops",
+            "aws_iam_role.bedrock_kb",
+            "aws_iam_role.lambda",
+            "aws_lambda_function.chat",
+            "aws_opensearchserverless_access_policy.data",
+            "aws_opensearchserverless_collection.vector",
+            "aws_opensearchserverless_security_policy.encryption",
+            "aws_opensearchserverless_security_policy.network",
+            "data.archive_file.lambda",
+            "data.aws_caller_identity.current",
+            "opensearch_index.bedrock",
+            "time_sleep.wait_for_collection"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_integration",
+      "name": "options",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "cache_key_parameters": [],
+            "cache_namespace": "91p1s1",
+            "connection_id": "",
+            "connection_type": "INTERNET",
+            "content_handling": "",
+            "credentials": "",
+            "http_method": "OPTIONS",
+            "id": "agi-8mve2ats01-91p1s1-OPTIONS",
+            "integration_http_method": "",
+            "passthrough_behavior": "WHEN_NO_MATCH",
+            "request_parameters": {},
+            "request_templates": {
+              "application/json": "{\"statusCode\": 200}"
+            },
+            "resource_id": "91p1s1",
+            "rest_api_id": "8mve2ats01",
+            "timeout_milliseconds": 29000,
+            "tls_config": [],
+            "type": "MOCK",
+            "uri": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_method.options",
+            "aws_api_gateway_resource.chat",
+            "aws_api_gateway_rest_api.chat"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_integration_response",
+      "name": "options",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "content_handling": "",
+            "http_method": "OPTIONS",
+            "id": "agir-8mve2ats01-91p1s1-OPTIONS-200",
+            "resource_id": "91p1s1",
+            "response_parameters": {
+              "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+              "method.response.header.Access-Control-Allow-Methods": "'POST,OPTIONS'",
+              "method.response.header.Access-Control-Allow-Origin": "'*'"
+            },
+            "response_templates": {},
+            "rest_api_id": "8mve2ats01",
+            "selection_pattern": "",
+            "status_code": "200"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_integration.options",
+            "aws_api_gateway_method.options",
+            "aws_api_gateway_method_response.options_200",
+            "aws_api_gateway_resource.chat",
+            "aws_api_gateway_rest_api.chat"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_method",
+      "name": "options",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "api_key_required": false,
+            "authorization": "NONE",
+            "authorization_scopes": [],
+            "authorizer_id": "",
+            "http_method": "OPTIONS",
+            "id": "agm-8mve2ats01-91p1s1-OPTIONS",
+            "operation_name": "",
+            "request_models": {},
+            "request_parameters": {},
+            "request_validator_id": "",
+            "resource_id": "91p1s1",
+            "rest_api_id": "8mve2ats01"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_resource.chat",
+            "aws_api_gateway_rest_api.chat"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_method",
+      "name": "post",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "api_key_required": false,
+            "authorization": "NONE",
+            "authorization_scopes": [],
+            "authorizer_id": "",
+            "http_method": "POST",
+            "id": "agm-8mve2ats01-91p1s1-POST",
+            "operation_name": "",
+            "request_models": {},
+            "request_parameters": {},
+            "request_validator_id": "",
+            "resource_id": "91p1s1",
+            "rest_api_id": "8mve2ats01"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_resource.chat",
+            "aws_api_gateway_rest_api.chat"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_method_response",
+      "name": "options_200",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "http_method": "OPTIONS",
+            "id": "agmr-8mve2ats01-91p1s1-OPTIONS-200",
+            "resource_id": "91p1s1",
+            "response_models": {
+              "application/json": "Empty"
+            },
+            "response_parameters": {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true
+            },
+            "rest_api_id": "8mve2ats01",
+            "status_code": "200"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_method.options",
+            "aws_api_gateway_resource.chat",
+            "aws_api_gateway_rest_api.chat"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_resource",
+      "name": "chat",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "91p1s1",
+            "parent_id": "a3yttq4gig",
+            "path": "/chat",
+            "path_part": "chat",
+            "rest_api_id": "8mve2ats01"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_rest_api.chat"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_rest_api",
+      "name": "chat",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "api_key_source": "HEADER",
+            "arn": "arn:aws:apigateway:us-east-1::/restapis/8mve2ats01",
+            "binary_media_types": [],
+            "body": null,
+            "created_date": "2026-07-11T04:42:55Z",
+            "description": "API REST du chatbot DevOps — proxy vers Lambda",
+            "disable_execute_api_endpoint": false,
+            "endpoint_configuration": [
+              {
+                "ip_address_type": "ipv4",
+                "types": [
+                  "REGIONAL"
+                ],
+                "vpc_endpoint_ids": []
+              }
+            ],
+            "execution_arn": "arn:aws:execute-api:us-east-1:541614061098:8mve2ats01",
+            "fail_on_warnings": null,
+            "id": "8mve2ats01",
+            "minimum_compression_size": "",
+            "name": "devops-chatbot-api",
+            "parameters": null,
+            "policy": "",
+            "put_rest_api_mode": null,
+            "root_resource_id": "a3yttq4gig",
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-api"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-api"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_stage",
+      "name": "dev",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "access_log_settings": [],
+            "arn": "arn:aws:apigateway:us-east-1::/restapis/8mve2ats01/stages/dev",
+            "cache_cluster_enabled": false,
+            "cache_cluster_size": "",
+            "canary_settings": [],
+            "client_certificate_id": "",
+            "deployment_id": "k7rcoy",
+            "description": "",
+            "documentation_version": "",
+            "execution_arn": "arn:aws:execute-api:us-east-1:541614061098:8mve2ats01/dev",
+            "id": "ags-8mve2ats01-dev",
+            "invoke_url": "https://8mve2ats01.execute-api.us-east-1.amazonaws.com/dev",
+            "rest_api_id": "8mve2ats01",
+            "stage_name": "dev",
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-dev"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-dev"
+            },
+            "variables": {},
+            "web_acl_arn": "",
+            "xray_tracing_enabled": false
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_deployment.chat",
+            "aws_api_gateway_integration.lambda",
+            "aws_api_gateway_integration.options",
+            "aws_api_gateway_integration_response.options",
+            "aws_api_gateway_method.options",
+            "aws_api_gateway_method.post",
+            "aws_api_gateway_method_response.options_200",
+            "aws_api_gateway_resource.chat",
+            "aws_api_gateway_rest_api.chat",
+            "aws_bedrockagent_knowledge_base.devops",
+            "aws_iam_role.bedrock_kb",
+            "aws_iam_role.lambda",
+            "aws_lambda_function.chat",
+            "aws_opensearchserverless_access_policy.data",
+            "aws_opensearchserverless_collection.vector",
+            "aws_opensearchserverless_security_policy.encryption",
+            "aws_opensearchserverless_security_policy.network",
+            "data.archive_file.lambda",
+            "data.aws_caller_identity.current",
+            "opensearch_index.bedrock",
+            "time_sleep.wait_for_collection"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_bedrockagent_data_source",
+      "name": "s3",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "data_deletion_policy": "DELETE",
+            "data_source_configuration": [
+              {
+                "confluence_configuration": [],
+                "s3_configuration": [
+                  {
+                    "bucket_arn": "arn:aws:s3:::devops-chatbot-docs-541614061098",
+                    "bucket_owner_account_id": null,
+                    "inclusion_prefixes": null
+                  }
+                ],
+                "salesforce_configuration": [],
+                "share_point_configuration": [],
+                "type": "S3",
+                "web_configuration": []
+              }
+            ],
+            "data_source_id": "0NH2J2T3TC",
+            "description": null,
+            "id": "0NH2J2T3TC,2EKLTQXAXF",
+            "knowledge_base_id": "2EKLTQXAXF",
+            "name": "devops-chatbot-s3-docs",
+            "server_side_encryption_configuration": [],
+            "timeouts": null,
+            "vector_ingestion_configuration": [
+              {
+                "chunking_configuration": [
+                  {
+                    "chunking_strategy": "FIXED_SIZE",
+                    "fixed_size_chunking_configuration": [
+                      {
+                        "max_tokens": 512,
+                        "overlap_percentage": 20
+                      }
+                    ],
+                    "hierarchical_chunking_configuration": [],
+                    "semantic_chunking_configuration": []
+                  }
+                ],
+                "custom_transformation_configuration": [],
+                "parsing_configuration": []
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "dependencies": [
+            "aws_bedrockagent_knowledge_base.devops",
+            "aws_iam_role.bedrock_kb",
+            "aws_opensearchserverless_access_policy.data",
+            "aws_opensearchserverless_collection.vector",
+            "aws_opensearchserverless_security_policy.encryption",
+            "aws_opensearchserverless_security_policy.network",
+            "aws_s3_bucket.docs",
+            "data.aws_caller_identity.current",
+            "opensearch_index.bedrock",
+            "time_sleep.wait_for_collection"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_bedrockagent_knowledge_base",
+      "name": "devops",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:bedrock:us-east-1:541614061098:knowledge-base/2EKLTQXAXF",
+            "created_at": "2026-07-11T04:48:15Z",
+            "description": null,
+            "failure_reasons": null,
+            "id": "2EKLTQXAXF",
+            "knowledge_base_configuration": [
+              {
+                "type": "VECTOR",
+                "vector_knowledge_base_configuration": [
+                  {
+                    "embedding_model_arn": "arn:aws:bedrock:us-east-1::foundation-model/amazon.titan-embed-text-v2:0",
+                    "embedding_model_configuration": [],
+                    "supplemental_data_storage_configuration": []
+                  }
+                ]
+              }
+            ],
+            "name": "devops-chatbot-kb",
+            "role_arn": "arn:aws:iam::541614061098:role/devops-chatbot-bedrock-kb-role",
+            "storage_configuration": [
+              {
+                "opensearch_serverless_configuration": [
+                  {
+                    "collection_arn": "arn:aws:aoss:us-east-1:541614061098:collection/9bkhpgve7n5xigm1fx11",
+                    "field_mapping": [
+                      {
+                        "metadata_field": "AMAZON_BEDROCK_METADATA",
+                        "text_field": "AMAZON_BEDROCK_TEXT_CHUNK",
+                        "vector_field": "bedrock-knowledge-base-default-vector"
+                      }
+                    ],
+                    "vector_index_name": "bedrock-knowledge-base-default-index"
+                  }
+                ],
+                "pinecone_configuration": [],
+                "rds_configuration": [],
+                "redis_enterprise_cloud_configuration": [],
+                "type": "OPENSEARCH_SERVERLESS"
+              }
+            ],
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-kb"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-kb"
+            },
+            "timeouts": null,
+            "updated_at": "2026-07-11T04:48:15Z"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "dependencies": [
+            "aws_iam_role.bedrock_kb",
+            "aws_opensearchserverless_access_policy.data",
+            "aws_opensearchserverless_collection.vector",
+            "aws_opensearchserverless_security_policy.encryption",
+            "aws_opensearchserverless_security_policy.network",
+            "data.aws_caller_identity.current",
+            "opensearch_index.bedrock",
+            "time_sleep.wait_for_collection"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_group",
+      "name": "ecs",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:logs:us-east-1:541614061098:log-group:/ecs/devops-chatbot-streamlit",
+            "id": "/ecs/devops-chatbot-streamlit",
+            "kms_key_id": "",
+            "log_group_class": "STANDARD",
+            "name": "/ecs/devops-chatbot-streamlit",
+            "name_prefix": "",
+            "retention_in_days": 14,
+            "skip_destroy": false,
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-ecs-logs"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-ecs-logs"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_group",
+      "name": "lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:logs:us-east-1:541614061098:log-group:/aws/lambda/devops-chatbot-chat",
+            "id": "/aws/lambda/devops-chatbot-chat",
+            "kms_key_id": "",
+            "log_group_class": "STANDARD",
+            "name": "/aws/lambda/devops-chatbot-chat",
+            "name_prefix": "",
+            "retention_in_days": 14,
+            "skip_destroy": false,
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-lambda-logs"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-lambda-logs"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_bedrockagent_knowledge_base.devops",
+            "aws_iam_role.bedrock_kb",
+            "aws_iam_role.lambda",
+            "aws_lambda_function.chat",
+            "aws_opensearchserverless_access_policy.data",
+            "aws_opensearchserverless_collection.vector",
+            "aws_opensearchserverless_security_policy.encryption",
+            "aws_opensearchserverless_security_policy.network",
+            "data.archive_file.lambda",
+            "data.aws_caller_identity.current",
+            "opensearch_index.bedrock",
+            "time_sleep.wait_for_collection"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecr_repository",
+      "name": "streamlit",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ecr:us-east-1:541614061098:repository/devops-chatbot-streamlit",
+            "encryption_configuration": [
+              {
+                "encryption_type": "AES256",
+                "kms_key": ""
+              }
+            ],
+            "force_delete": true,
+            "id": "devops-chatbot-streamlit",
+            "image_scanning_configuration": [
+              {
+                "scan_on_push": true
+              }
+            ],
+            "image_tag_mutability": "MUTABLE",
+            "name": "devops-chatbot-streamlit",
+            "registry_id": "541614061098",
+            "repository_url": "541614061098.dkr.ecr.us-east-1.amazonaws.com/devops-chatbot-streamlit",
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-streamlit"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-streamlit"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxMjAwMDAwMDAwMDAwfX0="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecs_cluster",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ecs:us-east-1:541614061098:cluster/devops-chatbot-cluster",
+            "configuration": [],
+            "id": "arn:aws:ecs:us-east-1:541614061098:cluster/devops-chatbot-cluster",
+            "name": "devops-chatbot-cluster",
+            "service_connect_defaults": [],
+            "setting": [
+              {
+                "name": "containerInsights",
+                "value": "disabled"
+              }
+            ],
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-cluster"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-cluster"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_ecs_task_definition",
+      "name": "streamlit",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ecs:us-east-1:541614061098:task-definition/devops-chatbot-streamlit:1",
+            "arn_without_revision": "arn:aws:ecs:us-east-1:541614061098:task-definition/devops-chatbot-streamlit",
+            "container_definitions": "[{\"environment\":[{\"name\":\"API_GATEWAY_URL\",\"value\":\"https://8mve2ats01.execute-api.us-east-1.amazonaws.com/dev/chat\"}],\"essential\":true,\"image\":\"541614061098.dkr.ecr.us-east-1.amazonaws.com/devops-chatbot-streamlit:latest\",\"logConfiguration\":{\"logDriver\":\"awslogs\",\"options\":{\"awslogs-group\":\"/ecs/devops-chatbot-streamlit\",\"awslogs-region\":\"us-east-1\",\"awslogs-stream-prefix\":\"streamlit\"}},\"mountPoints\":[],\"name\":\"streamlit\",\"portMappings\":[{\"containerPort\":8501,\"hostPort\":8501,\"protocol\":\"tcp\"}],\"systemControls\":[],\"volumesFrom\":[]}]",
+            "cpu": "256",
+            "enable_fault_injection": false,
+            "ephemeral_storage": [],
+            "execution_role_arn": "arn:aws:iam::541614061098:role/devops-chatbot-ecs-exec-role",
+            "family": "devops-chatbot-streamlit",
+            "id": "devops-chatbot-streamlit",
+            "inference_accelerator": [],
+            "ipc_mode": "",
+            "memory": "512",
+            "network_mode": "awsvpc",
+            "pid_mode": "",
+            "placement_constraints": [],
+            "proxy_configuration": [],
+            "requires_compatibilities": [
+              "FARGATE"
+            ],
+            "revision": 1,
+            "runtime_platform": [],
+            "skip_destroy": false,
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-streamlit-task"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-streamlit-task"
+            },
+            "task_role_arn": "",
+            "track_latest": false,
+            "volume": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_api_gateway_deployment.chat",
+            "aws_api_gateway_integration.lambda",
+            "aws_api_gateway_integration.options",
+            "aws_api_gateway_integration_response.options",
+            "aws_api_gateway_method.options",
+            "aws_api_gateway_method.post",
+            "aws_api_gateway_method_response.options_200",
+            "aws_api_gateway_resource.chat",
+            "aws_api_gateway_rest_api.chat",
+            "aws_api_gateway_stage.dev",
+            "aws_bedrockagent_knowledge_base.devops",
+            "aws_ecr_repository.streamlit",
+            "aws_iam_role.bedrock_kb",
+            "aws_iam_role.ecs_execution",
+            "aws_iam_role.lambda",
+            "aws_lambda_function.chat",
+            "aws_opensearchserverless_access_policy.data",
+            "aws_opensearchserverless_collection.vector",
+            "aws_opensearchserverless_security_policy.encryption",
+            "aws_opensearchserverless_security_policy.network",
+            "data.archive_file.lambda",
+            "data.aws_caller_identity.current",
+            "opensearch_index.bedrock",
+            "time_sleep.wait_for_collection"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "bedrock_kb",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::541614061098:role/devops-chatbot-bedrock-kb-role",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Condition\":{\"StringEquals\":{\"aws:SourceAccount\":\"541614061098\"}},\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"bedrock.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-07-11T04:42:55Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "devops-chatbot-bedrock-kb-role",
+            "inline_policy": [
+              {
+                "name": "devops-chatbot-bedrock-kb-policy",
+                "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"s3:GetObject\",\"s3:ListBucket\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:s3:::devops-chatbot-docs-541614061098\",\"arn:aws:s3:::devops-chatbot-docs-541614061098/*\"],\"Sid\":\"S3ReadAccess\"},{\"Action\":[\"bedrock:InvokeModel\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:bedrock:us-east-1::foundation-model/amazon.titan-embed-text-v2:0\"],\"Sid\":\"BedrockEmbedding\"},{\"Action\":[\"aoss:APIAccessAll\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:aoss:us-east-1:541614061098:collection/9bkhpgve7n5xigm1fx11\"],\"Sid\":\"OpenSearchAccess\"}]}"
+              }
+            ],
+            "managed_policy_arns": [],
+            "max_session_duration": 3600,
+            "name": "devops-chatbot-bedrock-kb-role",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-bedrock-kb-role"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-bedrock-kb-role"
+            },
+            "unique_id": "AROAX4GVWWYVITD657C4Q"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_caller_identity.current"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "ecs_execution",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::541614061098:role/devops-chatbot-ecs-exec-role",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-07-11T04:42:55Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "devops-chatbot-ecs-exec-role",
+            "inline_policy": [],
+            "managed_policy_arns": [
+              "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+            ],
+            "max_session_duration": 3600,
+            "name": "devops-chatbot-ecs-exec-role",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-ecs-exec-role"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-ecs-exec-role"
+            },
+            "unique_id": "AROAX4GVWWYVJEMAKNBBK"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::541614061098:role/devops-chatbot-lambda-role",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-07-11T04:42:55Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "devops-chatbot-lambda-role",
+            "inline_policy": [
+              {
+                "name": "devops-chatbot-lambda-policy",
+                "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"bedrock:RetrieveAndGenerate\",\"bedrock:Retrieve\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:bedrock:us-east-1:541614061098:knowledge-base/2EKLTQXAXF\"],\"Sid\":\"BedrockRAG\"},{\"Action\":[\"bedrock:InvokeModel\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0\"],\"Sid\":\"BedrockInvokeModel\"},{\"Action\":[\"logs:CreateLogGroup\",\"logs:CreateLogStream\",\"logs:PutLogEvents\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:logs:us-east-1:541614061098:*\"],\"Sid\":\"CloudWatchLogs\"}]}"
+              }
+            ],
+            "managed_policy_arns": [],
+            "max_session_duration": 3600,
+            "name": "devops-chatbot-lambda-role",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-lambda-role"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-lambda-role"
+            },
+            "unique_id": "AROAX4GVWWYVMNCHCWNCL"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy",
+      "name": "bedrock_kb",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "devops-chatbot-bedrock-kb-role:devops-chatbot-bedrock-kb-policy",
+            "name": "devops-chatbot-bedrock-kb-policy",
+            "name_prefix": "",
+            "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"s3:GetObject\",\"s3:ListBucket\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:s3:::devops-chatbot-docs-541614061098\",\"arn:aws:s3:::devops-chatbot-docs-541614061098/*\"],\"Sid\":\"S3ReadAccess\"},{\"Action\":[\"bedrock:InvokeModel\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:bedrock:us-east-1::foundation-model/amazon.titan-embed-text-v2:0\"],\"Sid\":\"BedrockEmbedding\"},{\"Action\":[\"aoss:APIAccessAll\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:aoss:us-east-1:541614061098:collection/9bkhpgve7n5xigm1fx11\"],\"Sid\":\"OpenSearchAccess\"}]}",
+            "role": "devops-chatbot-bedrock-kb-role"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_role.bedrock_kb",
+            "aws_opensearchserverless_access_policy.data",
+            "aws_opensearchserverless_collection.vector",
+            "aws_opensearchserverless_security_policy.encryption",
+            "aws_opensearchserverless_security_policy.network",
+            "aws_s3_bucket.docs",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy",
+      "name": "lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "devops-chatbot-lambda-role:devops-chatbot-lambda-policy",
+            "name": "devops-chatbot-lambda-policy",
+            "name_prefix": "",
+            "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"bedrock:RetrieveAndGenerate\",\"bedrock:Retrieve\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:bedrock:us-east-1:541614061098:knowledge-base/2EKLTQXAXF\"],\"Sid\":\"BedrockRAG\"},{\"Action\":[\"bedrock:InvokeModel\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0\"],\"Sid\":\"BedrockInvokeModel\"},{\"Action\":[\"logs:CreateLogGroup\",\"logs:CreateLogStream\",\"logs:PutLogEvents\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:logs:us-east-1:541614061098:*\"],\"Sid\":\"CloudWatchLogs\"}]}",
+            "role": "devops-chatbot-lambda-role"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_bedrockagent_knowledge_base.devops",
+            "aws_iam_role.bedrock_kb",
+            "aws_iam_role.lambda",
+            "aws_opensearchserverless_access_policy.data",
+            "aws_opensearchserverless_collection.vector",
+            "aws_opensearchserverless_security_policy.encryption",
+            "aws_opensearchserverless_security_policy.network",
+            "data.aws_caller_identity.current",
+            "opensearch_index.bedrock",
+            "time_sleep.wait_for_collection"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "ecs_execution",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "devops-chatbot-ecs-exec-role-20260711044255259900000004",
+            "policy_arn": "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
+            "role": "devops-chatbot-ecs-exec-role"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_role.ecs_execution"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_lambda_function",
+      "name": "chat",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "architectures": [
+              "x86_64"
+            ],
+            "arn": "arn:aws:lambda:us-east-1:541614061098:function:devops-chatbot-chat",
+            "code_sha256": "xUvFG+8ulCxdQFWLu0/fmwZnvIbz0UUnsZzV1IbAYeo=",
+            "code_signing_config_arn": "",
+            "dead_letter_config": [],
+            "description": "",
+            "environment": [
+              {
+                "variables": {
+                  "KNOWLEDGE_BASE_ID": "2EKLTQXAXF",
+                  "MODEL_ARN": "arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0"
+                }
+              }
+            ],
+            "ephemeral_storage": [
+              {
+                "size": 512
+              }
+            ],
+            "file_system_config": [],
+            "filename": "./.build/lambda.zip",
+            "function_name": "devops-chatbot-chat",
+            "handler": "handler.lambda_handler",
+            "id": "devops-chatbot-chat",
+            "image_config": [],
+            "image_uri": "",
+            "invoke_arn": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:541614061098:function:devops-chatbot-chat/invocations",
+            "kms_key_arn": "",
+            "last_modified": "2026-07-11T04:48:19.283+0000",
+            "layers": [],
+            "logging_config": [
+              {
+                "application_log_level": "",
+                "log_format": "Text",
+                "log_group": "/aws/lambda/devops-chatbot-chat",
+                "system_log_level": ""
+              }
+            ],
+            "memory_size": 256,
+            "package_type": "Zip",
+            "publish": false,
+            "qualified_arn": "arn:aws:lambda:us-east-1:541614061098:function:devops-chatbot-chat:$LATEST",
+            "qualified_invoke_arn": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:541614061098:function:devops-chatbot-chat:$LATEST/invocations",
+            "replace_security_groups_on_destroy": null,
+            "replacement_security_group_ids": null,
+            "reserved_concurrent_executions": -1,
+            "role": "arn:aws:iam::541614061098:role/devops-chatbot-lambda-role",
+            "runtime": "python3.12",
+            "s3_bucket": null,
+            "s3_key": null,
+            "s3_object_version": null,
+            "signing_job_arn": "",
+            "signing_profile_version_arn": "",
+            "skip_destroy": false,
+            "snap_start": [],
+            "source_code_hash": "xUvFG+8ulCxdQFWLu0/fmwZnvIbz0UUnsZzV1IbAYeo=",
+            "source_code_size": 1918,
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-chat"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-chat"
+            },
+            "timeout": 60,
+            "timeouts": null,
+            "tracing_config": [
+              {
+                "mode": "PassThrough"
+              }
+            ],
+            "version": "$LATEST",
+            "vpc_config": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_bedrockagent_knowledge_base.devops",
+            "aws_iam_role.bedrock_kb",
+            "aws_iam_role.lambda",
+            "aws_opensearchserverless_access_policy.data",
+            "aws_opensearchserverless_collection.vector",
+            "aws_opensearchserverless_security_policy.encryption",
+            "aws_opensearchserverless_security_policy.network",
+            "data.archive_file.lambda",
+            "data.aws_caller_identity.current",
+            "opensearch_index.bedrock",
+            "time_sleep.wait_for_collection"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_lambda_permission",
+      "name": "api_gateway",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "action": "lambda:InvokeFunction",
+            "event_source_token": null,
+            "function_name": "devops-chatbot-chat",
+            "function_url_auth_type": null,
+            "id": "AllowAPIGatewayInvoke",
+            "principal": "apigateway.amazonaws.com",
+            "principal_org_id": null,
+            "qualifier": "",
+            "source_account": null,
+            "source_arn": "arn:aws:execute-api:us-east-1:541614061098:8mve2ats01/*/*",
+            "statement_id": "AllowAPIGatewayInvoke",
+            "statement_id_prefix": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_rest_api.chat",
+            "aws_bedrockagent_knowledge_base.devops",
+            "aws_iam_role.bedrock_kb",
+            "aws_iam_role.lambda",
+            "aws_lambda_function.chat",
+            "aws_opensearchserverless_access_policy.data",
+            "aws_opensearchserverless_collection.vector",
+            "aws_opensearchserverless_security_policy.encryption",
+            "aws_opensearchserverless_security_policy.network",
+            "data.archive_file.lambda",
+            "data.aws_caller_identity.current",
+            "opensearch_index.bedrock",
+            "time_sleep.wait_for_collection"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_lb",
+      "name": "streamlit",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "access_logs": [
+              {
+                "bucket": "",
+                "enabled": false,
+                "prefix": ""
+              }
+            ],
+            "arn": "arn:aws:elasticloadbalancing:us-east-1:541614061098:loadbalancer/app/devops-chatbot-alb/4f5c87f7d1dc6994",
+            "arn_suffix": "app/devops-chatbot-alb/4f5c87f7d1dc6994",
+            "client_keep_alive": 3600,
+            "connection_logs": [
+              {
+                "bucket": "",
+                "enabled": false,
+                "prefix": ""
+              }
+            ],
+            "customer_owned_ipv4_pool": "",
+            "desync_mitigation_mode": "defensive",
+            "dns_name": "devops-chatbot-alb-1583798999.us-east-1.elb.amazonaws.com",
+            "dns_record_client_routing_policy": null,
+            "drop_invalid_header_fields": false,
+            "enable_cross_zone_load_balancing": true,
+            "enable_deletion_protection": false,
+            "enable_http2": true,
+            "enable_tls_version_and_cipher_suite_headers": false,
+            "enable_waf_fail_open": false,
+            "enable_xff_client_port": false,
+            "enable_zonal_shift": false,
+            "enforce_security_group_inbound_rules_on_private_link_traffic": "",
+            "id": "arn:aws:elasticloadbalancing:us-east-1:541614061098:loadbalancer/app/devops-chatbot-alb/4f5c87f7d1dc6994",
+            "idle_timeout": 60,
+            "internal": false,
+            "ip_address_type": "ipv4",
+            "ipam_pools": [],
+            "load_balancer_type": "application",
+            "minimum_load_balancer_capacity": [],
+            "name": "devops-chatbot-alb",
+            "name_prefix": "",
+            "preserve_host_header": false,
+            "security_groups": [
+              "sg-077e65c724380b5f2"
+            ],
+            "subnet_mapping": [
+              {
+                "allocation_id": "",
+                "ipv6_address": "",
+                "outpost_id": "",
+                "private_ipv4_address": "",
+                "subnet_id": "subnet-001a1903271b0ff29"
+              },
+              {
+                "allocation_id": "",
+                "ipv6_address": "",
+                "outpost_id": "",
+                "private_ipv4_address": "",
+                "subnet_id": "subnet-00d610bd10d597945"
+              },
+              {
+                "allocation_id": "",
+                "ipv6_address": "",
+                "outpost_id": "",
+                "private_ipv4_address": "",
+                "subnet_id": "subnet-01b946a17f119bbed"
+              },
+              {
+                "allocation_id": "",
+                "ipv6_address": "",
+                "outpost_id": "",
+                "private_ipv4_address": "",
+                "subnet_id": "subnet-03279076b93a5a9c6"
+              },
+              {
+                "allocation_id": "",
+                "ipv6_address": "",
+                "outpost_id": "",
+                "private_ipv4_address": "",
+                "subnet_id": "subnet-0a6239d27aa57fcee"
+              },
+              {
+                "allocation_id": "",
+                "ipv6_address": "",
+                "outpost_id": "",
+                "private_ipv4_address": "",
+                "subnet_id": "subnet-0b67892cfbdc178ac"
+              }
+            ],
+            "subnets": [
+              "subnet-001a1903271b0ff29",
+              "subnet-00d610bd10d597945",
+              "subnet-01b946a17f119bbed",
+              "subnet-03279076b93a5a9c6",
+              "subnet-0a6239d27aa57fcee",
+              "subnet-0b67892cfbdc178ac"
+            ],
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-alb"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-alb"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0a2065519f9bb9bb3",
+            "xff_header_processing_mode": "append",
+            "zone_id": "Z35SXDOTRQ7X7K"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_security_group.alb",
+            "data.aws_subnets.default",
+            "data.aws_vpc.default"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_lb_listener",
+      "name": "http",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "alpn_policy": null,
+            "arn": "arn:aws:elasticloadbalancing:us-east-1:541614061098:listener/app/devops-chatbot-alb/4f5c87f7d1dc6994/05b66731bae03aee",
+            "certificate_arn": null,
+            "default_action": [
+              {
+                "authenticate_cognito": [],
+                "authenticate_oidc": [],
+                "fixed_response": [],
+                "forward": [],
+                "order": 1,
+                "redirect": [],
+                "target_group_arn": "arn:aws:elasticloadbalancing:us-east-1:541614061098:targetgroup/devops-chatbot-tg/650a3bba658a9440",
+                "type": "forward"
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:us-east-1:541614061098:listener/app/devops-chatbot-alb/4f5c87f7d1dc6994/05b66731bae03aee",
+            "load_balancer_arn": "arn:aws:elasticloadbalancing:us-east-1:541614061098:loadbalancer/app/devops-chatbot-alb/4f5c87f7d1dc6994",
+            "mutual_authentication": [],
+            "port": 80,
+            "protocol": "HTTP",
+            "routing_http_request_x_amzn_mtls_clientcert_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_issuer_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_leaf_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_serial_number_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_subject_header_name": null,
+            "routing_http_request_x_amzn_mtls_clientcert_validity_header_name": null,
+            "routing_http_request_x_amzn_tls_cipher_suite_header_name": null,
+            "routing_http_request_x_amzn_tls_version_header_name": null,
+            "routing_http_response_access_control_allow_credentials_header_value": "",
+            "routing_http_response_access_control_allow_headers_header_value": "",
+            "routing_http_response_access_control_allow_methods_header_value": "",
+            "routing_http_response_access_control_allow_origin_header_value": "",
+            "routing_http_response_access_control_expose_headers_header_value": "",
+            "routing_http_response_access_control_max_age_header_value": "",
+            "routing_http_response_content_security_policy_header_value": "",
+            "routing_http_response_server_enabled": true,
+            "routing_http_response_strict_transport_security_header_value": "",
+            "routing_http_response_x_content_type_options_header_value": "",
+            "routing_http_response_x_frame_options_header_value": "",
+            "ssl_policy": "",
+            "tags": {},
+            "tags_all": {},
+            "tcp_idle_timeout_seconds": null,
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsInVwZGF0ZSI6MzAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "aws_lb.streamlit",
+            "aws_lb_target_group.streamlit",
+            "aws_security_group.alb",
+            "data.aws_subnets.default",
+            "data.aws_vpc.default"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_lb_target_group",
+      "name": "streamlit",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:elasticloadbalancing:us-east-1:541614061098:targetgroup/devops-chatbot-tg/650a3bba658a9440",
+            "arn_suffix": "targetgroup/devops-chatbot-tg/650a3bba658a9440",
+            "connection_termination": null,
+            "deregistration_delay": "300",
+            "health_check": [
+              {
+                "enabled": true,
+                "healthy_threshold": 2,
+                "interval": 30,
+                "matcher": "200",
+                "path": "/_stcore/health",
+                "port": "traffic-port",
+                "protocol": "HTTP",
+                "timeout": 10,
+                "unhealthy_threshold": 3
+              }
+            ],
+            "id": "arn:aws:elasticloadbalancing:us-east-1:541614061098:targetgroup/devops-chatbot-tg/650a3bba658a9440",
+            "ip_address_type": "ipv4",
+            "lambda_multi_value_headers_enabled": false,
+            "load_balancer_arns": [
+              "arn:aws:elasticloadbalancing:us-east-1:541614061098:loadbalancer/app/devops-chatbot-alb/4f5c87f7d1dc6994"
+            ],
+            "load_balancing_algorithm_type": "round_robin",
+            "load_balancing_anomaly_mitigation": "off",
+            "load_balancing_cross_zone_enabled": "use_load_balancer_configuration",
+            "name": "devops-chatbot-tg",
+            "name_prefix": "",
+            "port": 8501,
+            "preserve_client_ip": null,
+            "protocol": "HTTP",
+            "protocol_version": "HTTP1",
+            "proxy_protocol_v2": false,
+            "slow_start": 0,
+            "stickiness": [
+              {
+                "cookie_duration": 86400,
+                "cookie_name": "",
+                "enabled": false,
+                "type": "lb_cookie"
+              }
+            ],
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-tg"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-tg"
+            },
+            "target_failover": [
+              {
+                "on_deregistration": null,
+                "on_unhealthy": null
+              }
+            ],
+            "target_group_health": [
+              {
+                "dns_failover": [
+                  {
+                    "minimum_healthy_targets_count": "1",
+                    "minimum_healthy_targets_percentage": "off"
+                  }
+                ],
+                "unhealthy_state_routing": [
+                  {
+                    "minimum_healthy_targets_count": 1,
+                    "minimum_healthy_targets_percentage": "off"
+                  }
+                ]
+              }
+            ],
+            "target_health_state": [
+              {
+                "enable_unhealthy_connection_termination": null,
+                "unhealthy_draining_interval": null
+              }
+            ],
+            "target_type": "ip",
+            "vpc_id": "vpc-0a2065519f9bb9bb3"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_vpc.default"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_opensearchserverless_access_policy",
+      "name": "data",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": null,
+            "id": "devops-chatbot-data",
+            "name": "devops-chatbot-data",
+            "policy": "[{\"Principal\":[\"arn:aws:iam::541614061098:role/devops-chatbot-bedrock-kb-role\",\"arn:aws:iam::541614061098:user/mlops\"],\"Rules\":[{\"Permission\":[\"aoss:CreateIndex\",\"aoss:DeleteIndex\",\"aoss:UpdateIndex\",\"aoss:DescribeIndex\",\"aoss:ReadDocument\",\"aoss:WriteDocument\"],\"Resource\":[\"index/devops-chatbot-vectors/*\"],\"ResourceType\":\"index\"},{\"Permission\":[\"aoss:CreateCollectionItems\",\"aoss:DeleteCollectionItems\",\"aoss:UpdateCollectionItems\",\"aoss:DescribeCollectionItems\"],\"Resource\":[\"collection/devops-chatbot-vectors\"],\"ResourceType\":\"collection\"}]}]",
+            "policy_version": "MTc4Mzc0NDk3NTU0N18x",
+            "type": "data"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "dependencies": [
+            "aws_iam_role.bedrock_kb",
+            "data.aws_caller_identity.current"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_opensearchserverless_collection",
+      "name": "vector",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:aoss:us-east-1:541614061098:collection/9bkhpgve7n5xigm1fx11",
+            "collection_endpoint": "https://9bkhpgve7n5xigm1fx11.us-east-1.aoss.amazonaws.com",
+            "dashboard_endpoint": "https://9bkhpgve7n5xigm1fx11.us-east-1.aoss.amazonaws.com/_dashboards",
+            "description": null,
+            "id": "9bkhpgve7n5xigm1fx11",
+            "kms_key_arn": "auto",
+            "name": "devops-chatbot-vectors",
+            "standby_replicas": "DISABLED",
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-vectors"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-vectors"
+            },
+            "timeouts": null,
+            "type": "VECTORSEARCH"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "dependencies": [
+            "aws_iam_role.bedrock_kb",
+            "aws_opensearchserverless_access_policy.data",
+            "aws_opensearchserverless_security_policy.encryption",
+            "aws_opensearchserverless_security_policy.network",
+            "data.aws_caller_identity.current"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_opensearchserverless_security_policy",
+      "name": "encryption",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": null,
+            "id": "devops-chatbot-enc",
+            "name": "devops-chatbot-enc",
+            "policy": "{\"AWSOwnedKey\":true,\"Rules\":[{\"Resource\":[\"collection/devops-chatbot-vectors\"],\"ResourceType\":\"collection\"}]}",
+            "policy_version": "MTc4Mzc0NDk3NTA3N18x",
+            "type": "encryption"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_opensearchserverless_security_policy",
+      "name": "network",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": null,
+            "id": "devops-chatbot-net",
+            "name": "devops-chatbot-net",
+            "policy": "[{\"AllowFromPublic\":true,\"Rules\":[{\"Resource\":[\"collection/devops-chatbot-vectors\"],\"ResourceType\":\"collection\"},{\"Resource\":[\"collection/devops-chatbot-vectors\"],\"ResourceType\":\"dashboard\"}]}]",
+            "policy_version": "MTc4Mzc0NDk3NTA1Ml8x",
+            "type": "network"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "docs",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::devops-chatbot-docs-541614061098",
+            "bucket": "devops-chatbot-docs-541614061098",
+            "bucket_domain_name": "devops-chatbot-docs-541614061098.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "devops-chatbot-docs-541614061098.s3.us-east-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": true,
+            "grant": [
+              {
+                "id": "51b2f85dfedc7ed0c9ef90d4c9f800027d4d65fbe49d79f978a8866ac8de0b1b",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z3AQBSTGFYJSTF",
+            "id": "devops-chatbot-docs-541614061098",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "",
+            "region": "us-east-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-docs"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-docs"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": true,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_public_access_block",
+      "name": "docs",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "bucket": "devops-chatbot-docs-541614061098",
+            "id": "devops-chatbot-docs-541614061098",
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.docs",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_server_side_encryption_configuration",
+      "name": "docs",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "devops-chatbot-docs-541614061098",
+            "expected_bucket_owner": "",
+            "id": "devops-chatbot-docs-541614061098",
+            "rule": [
+              {
+                "apply_server_side_encryption_by_default": [
+                  {
+                    "kms_master_key_id": "",
+                    "sse_algorithm": "AES256"
+                  }
+                ],
+                "bucket_key_enabled": false
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.docs",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_versioning",
+      "name": "docs",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "devops-chatbot-docs-541614061098",
+            "expected_bucket_owner": "",
+            "id": "devops-chatbot-docs-541614061098",
+            "mfa": null,
+            "versioning_configuration": [
+              {
+                "mfa_delete": "",
+                "status": "Enabled"
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.docs",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "alb",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:541614061098:security-group/sg-077e65c724380b5f2",
+            "description": "Trafic HTTP entrant vers ALB Streamlit",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-077e65c724380b5f2",
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "HTTP depuis Internet",
+                "from_port": 80,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 80
+              }
+            ],
+            "name": "devops-chatbot-alb-sg",
+            "name_prefix": "",
+            "owner_id": "541614061098",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-alb-sg"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-alb-sg"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0a2065519f9bb9bb3"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "data.aws_vpc.default"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "ecs",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:541614061098:security-group/sg-09798100113185921",
+            "description": "Trafic Streamlit port 8501 depuis ALB uniquement",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-09798100113185921",
+            "ingress": [
+              {
+                "cidr_blocks": [],
+                "description": "Streamlit depuis ALB",
+                "from_port": 8501,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-077e65c724380b5f2"
+                ],
+                "self": false,
+                "to_port": 8501
+              }
+            ],
+            "name": "devops-chatbot-ecs-sg",
+            "name_prefix": "",
+            "owner_id": "541614061098",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-ecs-sg"
+            },
+            "tags_all": {
+              "Environment": "dev",
+              "Name": "devops-chatbot-ecs-sg"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0a2065519f9bb9bb3"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_security_group.alb",
+            "data.aws_vpc.default"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "opensearch_index",
+      "name": "bedrock",
+      "provider": "provider[\"registry.terraform.io/opensearch-project/opensearch\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "aliases": null,
+            "analysis_analyzer": null,
+            "analysis_char_filter": null,
+            "analysis_filter": null,
+            "analysis_normalizer": null,
+            "analysis_tokenizer": null,
+            "analyze_max_token_count": null,
+            "auto_expand_replicas": null,
+            "blocks_metadata": null,
+            "blocks_read": null,
+            "blocks_read_only": null,
+            "blocks_read_only_allow_delete": null,
+            "blocks_write": null,
+            "codec": null,
+            "default_pipeline": null,
+            "force_destroy": true,
+            "gc_deletes": null,
+            "highlight_max_analyzed_offset": null,
+            "id": "bedrock-knowledge-base-default-index",
+            "include_type_name": null,
+            "index_knn": true,
+            "index_knn_algo_param_ef_search": "512",
+            "index_similarity_default": null,
+            "indexing_slowlog_level": null,
+            "indexing_slowlog_source": null,
+            "indexing_slowlog_threshold_index_debug": null,
+            "indexing_slowlog_threshold_index_info": null,
+            "indexing_slowlog_threshold_index_trace": null,
+            "indexing_slowlog_threshold_index_warn": null,
+            "load_fixed_bitset_filters_eagerly": null,
+            "mappings": "{\"properties\":{\"AMAZON_BEDROCK_METADATA\":{\"index\":false,\"type\":\"text\"},\"AMAZON_BEDROCK_TEXT_CHUNK\":{\"type\":\"text\"},\"bedrock-knowledge-base-default-vector\":{\"dimension\":1024,\"method\":{\"engine\":\"faiss\",\"name\":\"hnsw\",\"parameters\":{\"ef_construction\":512,\"m\":16},\"space_type\":\"l2\"},\"type\":\"knn_vector\"}}}",
+            "max_docvalue_fields_search": null,
+            "max_inner_result_window": null,
+            "max_ngram_diff": null,
+            "max_refresh_listeners": null,
+            "max_regex_length": null,
+            "max_rescore_window": null,
+            "max_result_window": null,
+            "max_script_fields": null,
+            "max_shingle_diff": null,
+            "max_terms_count": null,
+            "name": "bedrock-knowledge-base-default-index",
+            "number_of_replicas": "0",
+            "number_of_routing_shards": null,
+            "number_of_shards": "2",
+            "refresh_interval": null,
+            "rollover_alias": null,
+            "routing_allocation_enable": null,
+            "routing_partition_size": null,
+            "routing_rebalance_enable": null,
+            "search_idle_after": null,
+            "search_slowlog_level": null,
+            "search_slowlog_threshold_fetch_debug": null,
+            "search_slowlog_threshold_fetch_info": null,
+            "search_slowlog_threshold_fetch_trace": null,
+            "search_slowlog_threshold_fetch_warn": null,
+            "search_slowlog_threshold_query_debug": null,
+            "search_slowlog_threshold_query_info": null,
+            "search_slowlog_threshold_query_trace": null,
+            "search_slowlog_threshold_query_warn": null,
+            "shard_check_on_startup": null,
+            "sort_field": null,
+            "sort_order": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_role.bedrock_kb",
+            "aws_opensearchserverless_access_policy.data",
+            "aws_opensearchserverless_collection.vector",
+            "aws_opensearchserverless_security_policy.encryption",
+            "aws_opensearchserverless_security_policy.network",
+            "data.aws_caller_identity.current",
+            "time_sleep.wait_for_collection"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "time_sleep",
+      "name": "wait_for_collection",
+      "provider": "provider[\"registry.terraform.io/hashicorp/time\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "create_duration": "120s",
+            "destroy_duration": null,
+            "id": "2026-07-11T04:48:07Z",
+            "triggers": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "dependencies": [
+            "aws_iam_role.bedrock_kb",
+            "aws_opensearchserverless_access_policy.data",
+            "aws_opensearchserverless_collection.vector",
+            "aws_opensearchserverless_security_policy.encryption",
+            "aws_opensearchserverless_security_policy.network",
+            "data.aws_caller_identity.current"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
