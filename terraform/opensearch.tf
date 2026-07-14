@@ -1,5 +1,3 @@
-# ─── OpenSearch Serverless — Base de données vectorielle ───
-
 # Obligatoire pour AWS AOSS : Politique de chiffrement des données.
 # Utilise une clé gérée par AWS pour chiffrer la collection au repos.
 resource "aws_opensearchserverless_security_policy" "encryption" {
@@ -98,7 +96,6 @@ resource "time_sleep" "wait_for_collection" {
 }
 
 # Création du schéma de l'index vectoriel avec le provider "opensearch".
-# Définit 1024 dimensions pour correspondre au modèle Titan Embed v2.
 resource "opensearch_index" "bedrock" {
   name                           = "bedrock-knowledge-base-default-index"
   number_of_shards               = "2"

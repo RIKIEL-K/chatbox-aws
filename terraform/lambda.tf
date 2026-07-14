@@ -1,5 +1,3 @@
-# ─── Rôle IAM Lambda — Moindre privilège strict ───
-
 # Rôle IAM de base autorisant le service Lambda à s'exécuter.
 resource "aws_iam_role" "lambda" {
   name = "${var.project_name}-lambda-role"

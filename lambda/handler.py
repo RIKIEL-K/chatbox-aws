@@ -36,8 +36,7 @@ bedrock_agent = boto3.client("bedrock-agent-runtime")
 KNOWLEDGE_BASE_ID = os.environ["KNOWLEDGE_BASE_ID"]
 MODEL_ARN = os.environ["MODEL_ARN"]
 
-# En-têtes CORS obligatoires car API Gateway est en proxy integration.
-# Autorise Streamlit à communiquer avec cette API.
+
 CORS_HEADERS = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST,OPTIONS",
@@ -47,7 +46,6 @@ CORS_HEADERS = {
 
 def lambda_handler(event, context):
     # Point d'entrée de la Lambda.
-    # Répond d'abord aux requêtes preflight (OPTIONS) du navigateur.
     if event.get("httpMethod") == "OPTIONS":
         return _response(200, {"message": "CORS preflight OK"})
 

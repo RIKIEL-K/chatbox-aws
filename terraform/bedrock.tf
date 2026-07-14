@@ -1,5 +1,3 @@
-# ─── Rôle IAM pour Bedrock Knowledge Base ───
-
 resource "aws_iam_role" "bedrock_kb" {
   name = "${var.project_name}-bedrock-kb-role"
 
@@ -105,7 +103,6 @@ resource "aws_bedrockagent_data_source" "s3" {
     }
   }
 
-  # 512 tokens par chunk avec 20% de chevauchement pour le contexte
   vector_ingestion_configuration {
     chunking_configuration {
       chunking_strategy = "FIXED_SIZE"

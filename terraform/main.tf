@@ -1,5 +1,3 @@
-# Déclaration des providers Terraform requis pour ce projet.
-# Inclus AWS, OpenSearch (pour l'index) et des utilitaires.
 terraform {
   required_version = ">= 1.5.0"
 
@@ -23,7 +21,7 @@ terraform {
   }
 }
 
-# Provider AWS principal configuré avec la région choisie.
+
 provider "aws" {
   region = var.aws_region
 }
@@ -41,7 +39,6 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 # Récupération du réseau VPC par défaut.
-# Utilisé pour déployer ECS Fargate sans créer de réseau complexe.
 data "aws_vpc" "default" {
   default = true
 }

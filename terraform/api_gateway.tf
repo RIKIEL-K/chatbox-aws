@@ -19,8 +19,6 @@ resource "aws_api_gateway_resource" "chat" {
   path_part   = "chat"
 }
 
-# ─── POST /chat → Lambda ───
-
 resource "aws_api_gateway_method" "post" {
   rest_api_id   = aws_api_gateway_rest_api.chat.id
   resource_id   = aws_api_gateway_resource.chat.id
@@ -37,7 +35,6 @@ resource "aws_api_gateway_integration" "lambda" {
   uri                     = aws_lambda_function.chat.invoke_arn
 }
 
-# ─── OPTIONS /chat → CORS Preflight (MOCK integration) ───
 
 resource "aws_api_gateway_method" "options" {
   rest_api_id   = aws_api_gateway_rest_api.chat.id
@@ -95,7 +92,6 @@ resource "aws_api_gateway_integration_response" "options" {
 resource "aws_api_gateway_deployment" "chat" {
   rest_api_id = aws_api_gateway_rest_api.chat.id
 
-  # Redéploie automatiquement quand la config API change
   triggers = {
     redeployment = sha1(jsonencode([
       aws_api_gateway_resource.chat.id,
@@ -148,7 +144,6 @@ resource "aws_api_gateway_stage" "dev" {
   }
 }
 
-# ─── Logging API Gateway → CloudWatch ───
 
 # Rôle IAM permettant à API Gateway d'écrire dans CloudWatch
 resource "aws_iam_role" "api_gateway_cloudwatch" {
@@ -177,6 +172,7 @@ resource "aws_iam_role_policy_attachment" "api_gateway_cloudwatch" {
 # Configuration du compte API Gateway pour utiliser le rôle CloudWatch
 resource "aws_api_gateway_account" "main" {
   cloudwatch_role_arn = aws_iam_role.api_gateway_cloudwatch.arn
+  reset_on_delete     = true
 
   depends_on = [aws_iam_role_policy_attachment.api_gateway_cloudwatch]
 }
