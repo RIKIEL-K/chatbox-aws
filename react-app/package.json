@@ -1,0 +1,23 @@
+{
+  "name": "devops-chatbot-react",
+  "private": true,
+  "version": "1.0.0",
+  "description": "React frontend for DevOps AI Chatbot",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-markdown": "^9.0.3",
+    "react-syntax-highlighter": "^15.6.1",
+    "lucide-react": "^0.460.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.4.1",
+    "vite": "^6.3.5"
+  }
+}

@@ -1,0 +1,106 @@
+.chat-window {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-lg) var(--space-xl);
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Welcome State ─── */
+.chat-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  animation: fadeInUp 600ms ease;
+  padding: var(--space-xl);
+}
+
+.chat-welcome-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, var(--accent-dim), rgba(0, 212, 255, 0.12));
+  border: 1px solid var(--border-accent);
+  color: var(--accent);
+  margin-bottom: var(--space-lg);
+  box-shadow: 0 0 40px rgba(0, 255, 136, 0.08);
+}
+
+.chat-welcome-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #00ff88, #00d4ff, #7c3aed);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 4s ease infinite;
+  margin-bottom: var(--space-sm);
+}
+
+.chat-welcome-subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  max-width: 480px;
+  margin-bottom: var(--space-xl);
+}
+
+.chat-welcome-chips {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+  max-width: 520px;
+  width: 100%;
+}
+
+.chat-welcome-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  transition: all var(--transition-base);
+  text-align: left;
+}
+
+.chat-welcome-chip:hover {
+  border-color: var(--border-accent);
+  background: var(--accent-dim);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.chat-welcome-chip strong {
+  color: var(--accent);
+}
+
+/* ─── Messages List ─── */
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: var(--space-lg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .chat-window {
+    padding: var(--space-md);
+  }
+
+  .chat-welcome-chips {
+    grid-template-columns: 1fr;
+  }
+}
