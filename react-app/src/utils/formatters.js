@@ -1,10 +1,5 @@
 /**
- * Helpers de formatage pour l'interface chat.
- */
-
-/**
  * Extrait le nom de fichier d'une URI S3.
- * Ex: "s3://bucket/docs/terraform.pdf" → "terraform.pdf"
  */
 export function extractSourceName(uri) {
   if (!uri) return 'Source inconnue';
@@ -32,3 +27,10 @@ export function truncate(text, maxLength = 200) {
   return text.slice(0, maxLength) + '…';
 }
 
+/**
+ * Génère un ID de conversation court lisible.
+ */
+export function shortId(id) {
+  if (!id) return 'Nouvelle';
+  return id.slice(0, 8);
+}
