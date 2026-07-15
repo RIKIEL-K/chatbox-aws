@@ -41,16 +41,6 @@ resource "aws_security_group" "ecs_react" {
 }
 
 
-resource "aws_security_group_rule" "alb_react_ingress" {
-  type              = "ingress"
-  description       = "React UI depuis Internet (port 3000)"
-  from_port         = 3000
-  to_port           = 3000
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.alb.id
-}
-
 
 resource "aws_lb_target_group" "react" {
   name        = "${var.project_name}-react-tg"
@@ -108,7 +98,7 @@ resource "aws_ecs_task_definition" "react" {
     environment = [
       {
         name  = "API_GATEWAY_URL"
-        value = "${aws_api_gateway_stage.dev.invoke_url}/chat"
+        value = aws_api_gateway_stage.dev.invoke_url
       }
     ]
 
