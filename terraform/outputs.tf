@@ -3,14 +3,14 @@ output "api_gateway_url" {
   value       = "${aws_api_gateway_stage.dev.invoke_url}/chat"
 }
 
-output "streamlit_url" {
-  description = "URL de l'application Streamlit (ALB)"
-  value       = "http://${aws_lb.streamlit.dns_name}"
+output "react_url" {
+  description = "URL de l'application React (ALB)"
+  value       = "http://${aws_lb.main.dns_name}"
 }
 
-output "ecr_repository_url" {
-  description = "URL du dépôt ECR pour push l'image Docker"
-  value       = aws_ecr_repository.streamlit.repository_url
+output "react_ecr_repository_url" {
+  description = "URL du dépôt ECR pour push l'image Docker React"
+  value       = aws_ecr_repository.react.repository_url
 }
 
 output "knowledge_base_id" {

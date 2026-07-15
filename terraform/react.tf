@@ -66,8 +66,8 @@ resource "aws_lb_target_group" "react" {
 
 
 resource "aws_lb_listener" "react" {
-  load_balancer_arn = aws_lb.streamlit.arn
-  port              = 3000
+  load_balancer_arn = aws_lb.main.arn
+  port              = 80
   protocol          = "HTTP"
 
   default_action {
@@ -164,14 +164,3 @@ resource "aws_ecs_service" "react" {
   }
 }
 
-# ─── Outputs ───
-
-output "react_url" {
-  description = "URL de l'application React (ALB port 3000)"
-  value       = "http://${aws_lb.streamlit.dns_name}:3000"
-}
-
-output "react_ecr_url" {
-  description = "URL du dépôt ECR pour l'image React"
-  value       = aws_ecr_repository.react.repository_url
-}
