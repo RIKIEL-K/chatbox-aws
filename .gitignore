@@ -39,5 +39,5 @@ desktop.ini
 *.pem
 *.key
 
-# ─── Artifacts ───
 lambda/lambda.zip
+.terraform.tfstate.lock.info

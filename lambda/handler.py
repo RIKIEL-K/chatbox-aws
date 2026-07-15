@@ -89,7 +89,7 @@ def lambda_handler(event, context):
         response = bedrock_agent.retrieve_and_generate(**params)
         latency = round((time.time() - start_time) * 1000)
 
-        # Extraction des citations (sources S3) et renvoi à Streamlit.
+        # Extraction des citations (sources S3) et renvoi à React.
         citations = _extract_citations(response)
 
         logger.info("Réponse Bedrock OK", extra={"extra_data": {
