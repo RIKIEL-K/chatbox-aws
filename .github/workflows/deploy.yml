@@ -1,0 +1,80 @@
+name: Deploy AWS DevOps Chatbot
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+  deploy:
+    name: Deploy to AWS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION || env.AWS_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.5.0"
+          terraform_wrapper: false
+
+      - name: Terraform Init
+        working-directory: ./terraform
+        run: terraform init
+
+      - name: Terraform Validate
+        working-directory: ./terraform
+        run: terraform validate
+
+      - name: Terraform Apply
+        working-directory: ./terraform
+        run: terraform apply -auto-approve
+
+      - name: Get Terraform Outputs
+        working-directory: ./terraform
+        id: tf-outputs
+        run: |
+          echo "ECR_URL=$(terraform output -raw react_ecr_repository_url)" >> $GITHUB_ENV
+          echo "KB_ID=$(terraform output -raw knowledge_base_id)" >> $GITHUB_ENV
+          echo "DS_ID=$(terraform output -raw data_source_id)" >> $GITHUB_ENV
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push Docker image to Amazon ECR
+        working-directory: ./react-app
+        run: |
+          IMAGE_TAG="latest"
+          
+          echo "Building Docker image..."
+          docker build -t ${{ env.ECR_URL }}:$IMAGE_TAG .
+          
+          echo "Pushing Docker image to ECR..."
+          docker push ${{ env.ECR_URL }}:$IMAGE_TAG
+
+      - name: Update Amazon ECS Service
+        run: |
+          aws ecs update-service \
+            --cluster devops-chatbot-cluster \
+            --service devops-chatbot-react \
+            --force-new-deployment
+
+      - name: Sync Bedrock Knowledge Base
+        run: |
+          aws bedrock-agent start-ingestion-job \
+            --knowledge-base-id ${{ env.KB_ID }} \
+            --data-source-id ${{ env.DS_ID }}
