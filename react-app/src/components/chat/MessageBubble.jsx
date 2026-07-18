@@ -1,7 +1,7 @@
 import { Bot, User } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import MessageActions from './MessageActions.jsx';
 import CitationList from './CitationList.jsx';
 import { formatTime } from '../../utils/formatters.js';
@@ -42,12 +42,12 @@ export default function MessageBubble({ message, index }) {
                   const codeString = String(children).replace(/\n$/, '');
                   return match ? (
                     <SyntaxHighlighter
-                      style={oneDark}
+                      style={oneLight}
                       language={match[1]}
                       PreTag="div"
                       customStyle={{
-                        borderRadius: '10px',
-                        border: '1px solid rgba(0,255,136,0.12)',
+                        borderRadius: '8px',
+                        border: '1px solid rgba(0, 0, 0, 0.10)',
                         fontSize: '0.85rem',
                         margin: '12px 0',
                       }}

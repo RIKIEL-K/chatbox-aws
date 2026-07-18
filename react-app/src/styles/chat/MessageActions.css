@@ -15,9 +15,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: var(--radius-sm);
+  border: 1px solid transparent;
   color: var(--text-muted);
   transition: all var(--transition-fast);
 }
@@ -25,10 +26,12 @@
 .action-btn:hover {
   color: var(--text-primary);
   background: var(--bg-hover);
+  border-color: var(--border);
 }
+
 
 .action-btn--active {
-  color: var(--accent) !important;
-  background: var(--accent-dim);
+  color: var(--text-inverse) !important;
+  background: var(--accent);
+  border-color: var(--accent);
 }
-

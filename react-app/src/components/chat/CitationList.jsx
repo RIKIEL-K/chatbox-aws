@@ -12,32 +12,46 @@ export default function CitationList({ citations }) {
     <div className="citation-list" id="citation-list">
       <button
         className="citation-toggle"
-        onClick={() => setIsExpanded(!isExpanded)}
+        onClick={() => setIsExpanded((prev) => !prev)}
         aria-expanded={isExpanded}
+        aria-controls="citation-items"
+        title={isExpanded ? 'Masquer les sources' : 'Afficher les sources'}
       >
-        <FileText size={14} />
-        <span>Sources consultées ({citations.length})</span>
-        {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+        <FileText size={13} />
+        <span>{label}</span>
+        {isExpanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
       </button>
 
       {isExpanded && (
-        <div className="citation-items">
-          {citations.map((cite, idx) => (
-            <div key={idx} className="citation-item">
-              <div className="citation-number">{idx + 1}</div>
-              <div className="citation-body">
-                <div className="citation-source">
-                  <FileText size={12} />
-                  <span>{extractSourceName(cite.source)}</span>
+        <div className="citation-items" id="citation-items" role="list">
+          {unique.map((cite, idx) => {
+            const sourceName = extractSourceName(cite.source ?? cite.uri ?? '');
+            const excerpt = cite.excerpt ?? cite.content ?? null;
+
+            return (
+              <div
+                key={idx}
+                className="citation-item"
+                role="listitem"
+                id={`citation-item-${idx}`}
+              >
+                <div className="citation-number" aria-label={`Source ${idx + 1}`}>
+                  {idx + 1}
                 </div>
-                {cite.excerpt && (
-                  <blockquote className="citation-excerpt">
-                    {truncate(cite.excerpt, 200)}
-                  </blockquote>
-                )}
+                <div className="citation-body">
+                  <div className="citation-source">
+                    <FileText size={12} />
+                    <span title={cite.source ?? cite.uri}>{sourceName}</span>
+                  </div>
+                  {excerpt && (
+                    <blockquote className="citation-excerpt">
+                      {truncate(excerpt, 220)}
+                    </blockquote>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

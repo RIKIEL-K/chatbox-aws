@@ -1,20 +1,20 @@
 .typing-indicator {
   display: flex;
   gap: var(--space-md);
-  padding: var(--space-sm) 0;
-  animation: fadeInUp 300ms ease;
+  padding: var(--space-xs) 0;
+  animation: fadeInUp 280ms ease;
 }
 
 .typing-avatar {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--accent-dim), rgba(0, 212, 255, 0.12));
-  border: 1px solid var(--border-accent);
-  color: var(--accent);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--text-inverse);
   flex-shrink: 0;
 }
 
@@ -26,7 +26,6 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: var(--space-md) var(--space-lg);
-  backdrop-filter: blur(8px);
 }
 
 .typing-dots {
@@ -36,8 +35,8 @@
 }
 
 .typing-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--accent);
   animation: bounce 1.4s ease-in-out infinite;
@@ -45,12 +44,12 @@
 
 .typing-dot:nth-child(2) {
   animation-delay: 0.16s;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .typing-dot:nth-child(3) {
   animation-delay: 0.32s;
-  opacity: 0.5;
+  opacity: 0.35;
 }
 
 .typing-label {
