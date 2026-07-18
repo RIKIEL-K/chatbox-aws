@@ -8,6 +8,21 @@ export default function CitationList({ citations }) {
 
   if (!citations || citations.length === 0) return null;
 
+  // Dé-duplication par source URI
+  const unique = citations.reduce((acc, cite) => {
+    const key = cite.source ?? cite.uri ?? JSON.stringify(cite);
+    if (!acc.seen.has(key)) {
+      acc.seen.add(key);
+      acc.list.push(cite);
+    }
+    return acc;
+  }, { seen: new Set(), list: [] }).list;
+
+  const label = unique.length === 1
+    ? '1 document consulté'
+    : `${unique.length} documents consultés`;
+
+
   return (
     <div className="citation-list" id="citation-list">
       <button
