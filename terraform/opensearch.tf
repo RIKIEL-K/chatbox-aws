@@ -1,5 +1,4 @@
-# Obligatoire pour AWS AOSS : Politique de chiffrement des données.
-# Utilise une clé gérée par AWS pour chiffrer la collection au repos.
+
 resource "aws_opensearchserverless_security_policy" "encryption" {
   name = "${var.project_name}-enc"
   type = "encryption"
@@ -88,14 +87,13 @@ resource "aws_opensearchserverless_collection" "vector" {
   }
 }
 
-# Pause nécessaire car AOSS met quelques minutes à démarrer 
-# avant d'accepter des requêtes de création d'index via l'API.
 resource "time_sleep" "wait_for_collection" {
-  depends_on      = [aws_opensearchserverless_collection.vector]
-  create_duration = "120s"
+  depends_on       = [aws_opensearchserverless_collection.vector]
+  create_duration  = "120s"
+  destroy_duration = "30s"
 }
 
-# Création du schéma de l'index vectoriel avec le provider "opensearch".
+
 resource "opensearch_index" "bedrock" {
   name                           = "bedrock-knowledge-base-default-index"
   number_of_shards               = "2"
@@ -121,9 +119,12 @@ resource "opensearch_index" "bedrock" {
   })
 
   force_destroy = true
-  depends_on    = [time_sleep.wait_for_collection]
 
-  # Empêche Terraform de recréer l'index si les mappings diffèrent légèrement
+  depends_on = [
+    time_sleep.wait_for_collection,
+    aws_opensearchserverless_access_policy.data
+  ]
+
   lifecycle {
     ignore_changes = [mappings]
   }
