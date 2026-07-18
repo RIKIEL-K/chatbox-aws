@@ -1,101 +1,88 @@
-# 🚀 DevOps AI Chatbot
+# InfraGPT
 
-Chatbot IA spécialisé DevOps propulsé par **Amazon Bedrock (Claude 3.5 Haiku)** avec RAG sur vos documentations via **Bedrock Knowledge Bases + OpenSearch Serverless**.
+> Chatbot IA spécialisé en infrastructure et DevOps, propulsé par **Amazon Bedrock** avec un système RAG (Retrieval-Augmented Generation) basé sur une documentation technique.
+
+🔗 **Application** : `http://<ALB_DNS_NAME>`
+
+---
 
 ## Architecture
 
-```
-┌─────────────────┐     ┌──────────────────┐     ┌─────────────────────────┐
-│   Streamlit UI  │────▶│  API Gateway     │────▶│  Lambda (Python 3.12)   │
-│   (ECS Fargate) │     │  REST /chat      │     │  retrieve_and_generate  │
-└─────────────────┘     └──────────────────┘     └───────────┬─────────────┘
-                                                             │
-                                                             ▼
-                                                  ┌─────────────────────┐
-                                                  │  Bedrock KB (RAG)   │
-                                                  │  Claude 3.5 Haiku   │
-                                                  └────┬───────────┬────┘
-                                                       │           │
-                                            ┌──────────▼──┐  ┌────▼──────────┐
-                                            │ OpenSearch   │  │  S3 Bucket    │
-                                            │ Serverless   │  │  (vos docs)   │
-                                            └─────────────┘  └───────────────┘
-```
+<!-- Insérez ici une capture d'écran de votre architecture AWS -->
+
+---
 
 ## Prérequis
 
-- **AWS CLI** configuré avec un profil valide
-- **Terraform** >= 1.5.0
-- **Docker** (pour builder l'image Streamlit)
-- **Accès Bedrock** activé dans la console AWS pour :
-  - `anthropic.claude-3-5-haiku-20241022-v1:0`
-  - `amazon.titan-embed-text-v2:0`
+Avant de commencer, assurez-vous que les éléments suivants sont installés et configurés sur votre machine :
 
-## Déploiement
+| Outil | Version minimale |
+|---|---|
+| [AWS CLI](https://aws.amazon.com/cli/) | v2 configurée avec un profil valide |
+| [Terraform](https://www.terraform.io/downloads) | >= 1.5.0 |
+| [Docker](https://www.docker.com/get-started/) | Toute version récente |
 
-### 1. Infrastructure Terraform
+---
+
+## Déploiement (1ère mise en place)
+
+### 1. Cloner le dépôt
 
 ```bash
-cd terraform
-terraform init
-terraform validate
-terraform plan
+git clone <url-du-repo>
+cd chatbox-aws
+```
+
+### 2. Initialiser le backend Terraform distant
+
+L'état Terraform est stocké dans un bucket S3 avec verrouillage DynamoDB pour la cohérence lors des déploiements CI/CD.
+
+```bash
+aws s3api create-bucket \
+  --bucket devops-chatbot-terraform-state-bucket \
+  --region us-east-1
+
+aws dynamodb create-table \
+  --table-name devops-chatbot-terraform-locks \
+  --attribute-definitions AttributeName=LockID,AttributeType=S \
+  --key-schema AttributeName=LockID,KeyType=HASH \
+  --billing-mode PAY_PER_REQUEST \
+  --region us-east-1
+```
+
+### 3. Déployer l'infrastructure
+
+```bash
 terraform apply
 ```
 
-> ⚠️ **Premier déploiement** : Si le provider OpenSearch échoue (la collection n'existe
-> pas encore), lancez d'abord :
-> ```bash
-> terraform apply -target=aws_opensearchserverless_collection.vector
-> ```
-> Puis relancez `terraform apply`.
-
-### 2. Upload de vos documents DevOps
+### 6. Accéder à l'application
 
 ```bash
-# Récupérer le nom du bucket depuis les outputs Terraform
-BUCKET=$(terraform output -raw s3_bucket_name)
-
-# Uploader vos fichiers PDF/Markdown
-aws s3 cp ./vos-docs/ s3://$BUCKET/ --recursive
+cd ../terraform
+terraform output react_url
+# → http://<ALB_DNS_NAME>
 ```
 
-### 3. Synchroniser la Knowledge Base
+---
+
+## Déploiement continu (CI/CD)
+
+Ce dépôt embarque un pipeline GitHub Actions (`./github/workflows/deploy.yml`) qui automatise l'intégralité du cycle de déploiement à chaque push sur `main` :
+
+- Bootstrap automatique du backend Terraform (S3 + DynamoDB) si les ressources n'existent pas encore
+- `terraform apply` pour mettre à jour l'infrastructure
+- Build et push de l'image Docker sur ECR
+- Redéploiement du service ECS
+- Synchronisation de la Knowledge Base Bedrock
+
+---
+
+## Détruire l'infrastructure
 
 ```bash
-KB_ID=$(terraform output -raw knowledge_base_id)
-DS_ID=$(terraform output -raw data_source_id)
-
-aws bedrock-agent start-ingestion-job \
-    --knowledge-base-id $KB_ID \
-    --data-source-id $DS_ID
+cd terraform
+terraform destroy
 ```
 
-### 4. Builder et pousser l'image Docker
-
-```bash
-ECR_URL=$(terraform output -raw ecr_repository_url)
-AWS_REGION=$(terraform output -raw aws_region 2>/dev/null || echo "us-east-1")
-
-# Login ECR
-aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_URL
-
-# Build & Push
-cd ../app
-docker build -t devops-chatbot-streamlit .
-docker tag devops-chatbot-streamlit:latest $ECR_URL:latest
-docker push $ECR_URL:latest
-
-# Forcer le redéploiement ECS pour prendre la nouvelle image
-aws ecs update-service \
-    --cluster devops-chatbot-cluster \
-    --service devops-chatbot-streamlit \
-    --force-new-deployment
-```
-
-### 5. Accéder à l'application
-
-```bash
-terraform output streamlit_url
-# → http://devops-chatbot-alb-XXXXXX.us-east-1.elb.amazonaws.com
-```
+> **Attention** : Les ressources de backend Terraform (bucket S3 et table DynamoDB) ne sont **pas** gérées par Terraform. Supprimez-les manuellement depuis la console AWS si vous souhaitez un nettoyage complet.
